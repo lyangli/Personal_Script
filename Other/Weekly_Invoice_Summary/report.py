@@ -136,7 +136,7 @@ def dataValidation(rawData, outputData, templateList):
 
 def output2xlsx(output):
     wbResult = Workbook()
-    resultFilename = datetime.now().strftime('%d-%m-%Y_%H%M%S.xlsx')
+    resultFilename = outputPath + datetime.now().strftime('%d-%m-%Y_%H%M%S.xlsx')
     wsResult = wbResult.active
     for row in output:
         wsResult.append(row)
@@ -144,8 +144,11 @@ def output2xlsx(output):
 
 
 # Fix Variable
-importPath = 'Import file'
-templateFile = 'template.xlsx'
+dir_path = os.path.dirname(os.path.realpath(__file__))
+importPath = dir_path + '/Input/'
+outputPath = dir_path + '/Output/'
+templateFile = dir_path + '/template.xlsx'
+
 
 # Initialize
 rawData = []
@@ -162,6 +165,5 @@ outputData.append(generateSUM(outputData))
 outputData.append(generateTotalOrder(rawData))
 dataValidation(rawData, outputData, templateData)
 output2xlsx(outputData)
-
-#for item in outputData:
-    #print(item)
+print('\n')
+input('Press ENTER to continue...')
